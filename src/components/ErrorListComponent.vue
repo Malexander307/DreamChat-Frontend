@@ -9,7 +9,8 @@ const props = defineProps(['errors'])
 </template>
 
 <style scoped>
-ol {
-  list-style-type: decimal;
+li {
+  color:red;
+  font-weight:bold;
 }
 </style>

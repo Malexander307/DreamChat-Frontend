@@ -1,7 +1,9 @@
 <script setup>
 import {Input, Button} from 'flowbite-vue'
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 import ErrorListComponent from "../../components/ErrorListComponent.vue";
+import client from "../../graphql/client"
+import SIGN_IN_MUTATION from "../../graphql/Mutations/SignInMutation"
 
 let login = null;
 let password = null;
@@ -23,8 +25,17 @@ function submitForm() {
     login: login,
     password: password
   })
-  console.log(login)
-  console.log(password)
+  client.mutate({
+    mutation: SIGN_IN_MUTATION,
+    variables: {
+      nickname: login,
+      password: password
+    }
+  }).then((data) => {
+    console.log(data)
+  }).catch((error) => {
+    console.log(error)
+  })
 }
 
 </script>
