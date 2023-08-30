@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import VueI18n from 'vue-i18n'
 import router from './router'
 import {DefaultApolloClient, provideApolloClient} from '@vue/apollo-composable'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
@@ -26,6 +27,6 @@ provideApolloClient(apolloClient)
 app.provide(DefaultApolloClient, apolloClient)
 app.use(createPinia())
 app.use(router)
-
+app.use(VueI18n)
 
 app.mount('#app')

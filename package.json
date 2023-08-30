@@ -28,8 +28,8 @@
     "roboto-fontface": "*",
     "vue": "^3.3.4",
     "vue-apollo": "^3.1.0",
+    "vue-i18n": "^8.28.2",
     "vue-router": "^4.2.2",
-    "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
@@ -51,6 +51,7 @@
     "vite-plugin-pwa": "^0.16.4",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
     "vitest": "^0.32.0",
+    "vue-cli-plugin-i18n": "~2.3.2",
     "vue-cli-plugin-vuetify": "~2.5.8"
   }
 }
