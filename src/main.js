@@ -9,7 +9,6 @@ import {createI18n} from 'vue-i18n'
 import router from './router'
 import {DefaultApolloClient, provideApolloClient} from '@vue/apollo-composable'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
-// import langStore from 'stores/lang'
 
 
 const httpLink = createHttpLink({
@@ -32,7 +31,6 @@ provideApolloClient(apolloClient)
 app.provide(DefaultApolloClient, apolloClient)
 app.use(createPinia())
 app.use(router)
-// app.use(i18n)
 
 app.mount('#app')
 
