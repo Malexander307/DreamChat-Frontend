@@ -1,3 +1,22 @@
 {
-  "login": "Логін"
+  "auth": {
+    "login": "Логін",
+    "register": "Регістрація",
+    "fields": {
+      "login": "Логін",
+      "password": "Пароль",
+      "confirm_password": "Підтвердіть пароль"
+    },
+    "placeholders": {
+      "for_login": "Введіть ваш логін",
+      "for_password": "Введіть ваш пароль",
+      "for_confirm_password": "Повторіть паш пароль"
+    },
+    "errors": {
+      "login_is_required": "Логін є обов'язковий",
+      "password_is_required": "Пароль є обов'язковий",
+      "confirm_password_is_required": "Підтвердження паролю є обов'язкове",
+      "wrong_confirm": "Паролі не сходяться"
+    }
+  }
 }

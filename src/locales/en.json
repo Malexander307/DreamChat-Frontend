@@ -1,3 +1,22 @@
 {
-  "login": "Login"
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "fields": {
+      "login": "Login",
+      "password": "Password",
+      "confirm_password": "Confirm password"
+    },
+    "placeholders": {
+      "for_login": "Enter your Login",
+      "for_password": "Enter your Password",
+      "for_confirm_password": "Repeat your Password"
+    },
+    "errors": {
+      "login_is_required": "Login is required",
+      "password_is_required": "Password is required",
+      "confirm_password_is_required": "Confirm password is required",
+      "wrong_confirm": "Password and confirm password must be equal"
+    }
+  }
 }
