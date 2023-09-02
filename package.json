@@ -28,7 +28,7 @@
     "roboto-fontface": "*",
     "vue": "^3.3.4",
     "vue-apollo": "^3.1.0",
-    "vue-i18n": "^8.28.2",
+    "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.2",
     "webfontloader": "^1.0.0"
   },

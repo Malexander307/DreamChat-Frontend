@@ -45,7 +45,7 @@ function submitForm() {
     <div class="flex justify-center items-center flex-col my-6">
       <div>
         <error-list-component :errors="errors"/>
-        <Input v-model="login" placeholder="enter your login" class="mb-1.5" label="Login"/>
+        <Input v-model="login" placeholder="enter your login" class="mb-1.5" :label="$t('login')"/>
         <Input type="password" v-model="password" placeholder="enter your password" label="Password"/>
       </div>
     </div>
