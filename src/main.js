@@ -22,15 +22,8 @@ const apolloClient = new ApolloClient({
 })
 
 import en from './locales/en';
-
-const i18n = createI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-    messages: {
-        en,
-    }
-})
-
+import ua from './locales/ua';
+import { useLangStore } from "./stores/lang";
 
 const app = createApp(App)
 
@@ -39,6 +32,27 @@ provideApolloClient(apolloClient)
 app.provide(DefaultApolloClient, apolloClient)
 app.use(createPinia())
 app.use(router)
-app.use(i18n)
+// app.use(i18n)
 
 app.mount('#app')
+
+const langStore = useLangStore();
+
+
+const i18n = createI18n({
+    legacy: false,
+    locale: useLangStore().locale || 'ua',
+    fallbackLocale: 'en',
+    messages: {
+        en,
+        ua
+    }
+})
+
+langStore.$subscribe((_, state) => {
+    console.info(state);
+    i18n.global.locale.value = state.locale;
+    localStorage.setItem("locale", state.locale)
+});
+
+app.use(i18n);
