@@ -12,7 +12,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core
 
 
 const httpLink = createHttpLink({
-    uri: 'http://127.0.0.1:8000/graphql',
+    uri: process.env.API_GRAPHQL_URL,
 })
 const cache = new InMemoryCache()
 const apolloClient = new ApolloClient({
@@ -39,8 +39,8 @@ const langStore = useLangStore();
 
 const i18n = createI18n({
     legacy: false,
-    locale: useLangStore().locale || 'ua',
-    fallbackLocale: 'en',
+    locale: useLangStore().locale || process.env.DEFAULT_LOCALE,
+    fallbackLocale: process.env.FALLBACK_LOCALE,
     messages: {
         en,
         ua
@@ -48,7 +48,6 @@ const i18n = createI18n({
 })
 
 langStore.$subscribe((_, state) => {
-    console.info(state);
     i18n.global.locale.value = state.locale;
     localStorage.setItem("locale", state.locale)
 });
