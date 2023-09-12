@@ -14,19 +14,19 @@ const errors = ref([]);
 
 function validateForm(args) {
   if (!args.login) {
-    errors.value.push('Login is required')
+    errors.value.push('auth.errors.login_is_required')
   }
 
   if (!args.password) {
-    errors.value.push('Password is required')
+    errors.value.push('auth.errors.password_is_required')
   }
 
   if (!args.repeat_password) {
-    errors.value.push('Confirm password is required')
+    errors.value.push('auth.errors.confirm_password_is_required')
   }
 
   if (args.repeat_password !== args.password) {
-    errors.value.push('Password and confirm password must be equal')
+    errors.value.push('auth.errors.wrong_confirm')
   }
 }
 
@@ -58,18 +58,29 @@ function submitForm() {
     <div class="flex justify-center items-center flex-col my-6">
       <div>
         <error-list-component :errors="errors"/>
-        <Input v-model="login" placeholder="enter your login" class="mb-1.5" required label="Login"/>
-        <Input type="password" v-model="password" placeholder="enter your password" class="mb-1.5" required
-               label="Password"/>
-        <Input type="password" v-model="repeat_password" placeholder="enter your password" required
-               label="Confirm password"/>
+        <Input v-model="login"
+               :placeholder="$t('auth.placeholders.for_login')"
+               class="mb-1.5"
+               :label="$t('auth.fields.login')"
+        />
+        <Input type="password"
+               v-model="password"
+               :placeholder="$t('auth.placeholders.for_password')"
+               class="mb-1.5"
+               :label="$t('auth.fields.password')"
+        />
+        <Input type="password"
+               v-model="repeat_password"
+               :placeholder="$t('auth.placeholders.for_confirm_password')"
+               :label="$t('auth.fields.confirm_password')"
+        />
       </div>
     </div>
     <div class="text-right">
       <RouterLink to="login">
-        <Button>Login</Button>
+        <Button>{{ $t('auth.login') }}</Button>
       </RouterLink>
-      <Button type="submit" class="m-4" @click="submitForm">Register</Button>
+      <Button type="submit" class="m-4" @click="submitForm"> {{ $t('auth.register') }}</Button>
     </div>
   </div>
 

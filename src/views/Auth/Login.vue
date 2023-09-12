@@ -11,11 +11,11 @@ const errors = ref([]);
 
 function validateForm(args) {
   if (!args.login) {
-    errors.value.push('Login is required')
+    errors.value.push('auth.errors.login_is_required')
   }
 
   if (!args.password) {
-    errors.value.push('Password is required')
+    errors.value.push('auth.errors.password_is_required')
   }
 }
 
@@ -45,15 +45,23 @@ function submitForm() {
     <div class="flex justify-center items-center flex-col my-6">
       <div>
         <error-list-component :errors="errors"/>
-        <Input v-model="login" placeholder="enter your login" class="mb-1.5" label="Login"/>
-        <Input type="password" v-model="password" placeholder="enter your password" label="Password"/>
+        <Input v-model="login"
+               :placeholder="$t('auth.placeholders.for_login')"
+               class="mb-1.5"
+               :label="$t('auth.fields.login')"
+        />
+        <Input type="password"
+               v-model="password"
+               :placeholder="$t('auth.placeholders.for_password')"
+               :label="$t('auth.fields.password')"
+        />
       </div>
     </div>
     <div class="text-right">
       <RouterLink to="registration">
-        <Button>Registration</Button>
+        <Button>{{ $t('auth.register') }}</Button>
       </RouterLink>
-      <Button class="m-4" @click="submitForm">Login</Button>
+      <Button class="m-4" @click="submitForm">{{ $t('auth.login') }}</Button>
     </div>
   </div>
 

@@ -3,8 +3,8 @@ const props = defineProps(['errors'])
 </script>
 
 <template>
-    <ul class="text-red-500">
-      <li class="font-bold" v-for="error in props.errors">{{ error }}</li>
+    <ul class="text-red-500 max-w-[300px]">
+      <li class="font-bold" v-for="error in props.errors">{{ $t(error) }}</li>
     </ul>
 </template>
 
