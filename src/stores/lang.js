@@ -1,9 +1,9 @@
 import {defineStore} from 'pinia'
-import { useLocalStorage } from "@vueuse/core"
 
 export const useLangStore = defineStore('lang', {
     // a function that returns a fresh state
     state: () => ({
-        locale: useLocalStorage('locale', 'ua'),
-    })
+        locale: import.meta.env.VITE_DEFAULT_LOCALE,
+    }),
+    persist: true,
 })
