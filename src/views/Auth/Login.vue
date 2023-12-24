@@ -4,6 +4,10 @@ import {ref} from "vue";
 import ErrorListComponent from "../../components/ErrorListComponent.vue";
 import client from "../../graphql/client"
 import SIGN_IN_MUTATION from "../../graphql/Mutations/SignInMutation"
+import gql from "graphql-tag";
+import PusherLink from "../../graphql/PusherLink";
+import {ApolloLink} from "apollo-link";
+import Pusher from "pusher-js";
 
 let login = null;
 let password = null;
@@ -19,7 +23,58 @@ function validateForm(args) {
   }
 }
 
+let channel = '';
+
+const subscriber = client
+    .subscribe({
+      query: gql`
+      subscription {
+        massageSent {
+          id
+        }
+      }
+    `,
+    })
+    .subscribe((postUpdated) => {
+      setChannel(postUpdated.extensions.lighthouse_subscriptions.channel);
+      // console.log(channel)
+    });
+
+const pusherClient = new Pusher('268637f01421fb4cd6a01', {
+  cluster: 'eu',
+  wsHost: '127.0.0.1',
+  wsPort: '6002',
+  forceTLS: false,
+  authEndpoint: `http://127.0.0.1:8000/graphql/subscriptions/auth`,
+  auth: {
+    headers: {
+      authorization: 'gNIhCwbX8qj2VVBpXmjSAnUV0UMvoRGKRKGDbb5P',
+    },
+  },
+})
+
+function setChannel(value) {
+  const channelP = pusherClient.subscribe(value);
+  channelP.bind('lighthouse-subscription', (data) => {
+    console.log(data)
+  })
+}
+
+
+// console.log(channel)
+
+
+
 function submitForm() {
+  // client.sub({
+  //   document: gql`subscription TEST{
+  //         massageSent {
+  //           id
+  //           text
+  //         }
+  //       }
+  //   `,
+  // })
   errors.value = [];
   validateForm({
     login: login,
