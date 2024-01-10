@@ -2,12 +2,14 @@
 import {Input, Button} from 'flowbite-vue'
 import {ref} from "vue";
 import ErrorListComponent from "../../components/ErrorListComponent.vue";
-import client from "../../graphql/client"
+import {useUserStore} from "../../stores/user";
+import client from "../../graphql/client";
 import SIGN_IN_MUTATION from "../../graphql/Mutations/SignInMutation"
 
 let login = null;
 let password = null;
 const errors = ref([]);
+const userStore = useUserStore();
 
 function validateForm(args) {
   if (!args.login) {
@@ -32,7 +34,8 @@ function submitForm() {
       password: password
     }
   }).then((data) => {
-    console.log(data)
+    userStore.token = data.data.signIn.token;
+    userStore.user = data.data.signIn.user;
   }).catch((error) => {
     console.log(error)
   })
