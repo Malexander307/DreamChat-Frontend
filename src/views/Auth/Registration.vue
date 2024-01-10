@@ -5,12 +5,14 @@ import ErrorListComponent from "../../components/ErrorListComponent.vue";
 import SIGN_UP_MUTATION from "../../graphql/Mutations/SignUpMutation";
 import client from "../../graphql/client";
 import router from "../../router";
+import {useUserStore} from "../../stores/user";
 
 let login = '';
 let password = '';
 let repeat_password = '';
 
 const errors = ref([]);
+const userStore = useUserStore();
 
 function validateForm(args) {
   if (!args.login) {
@@ -44,7 +46,8 @@ function submitForm() {
       password: password
     }
   }).then((data) => {
-    console.log(data)
+    userStore.token = data.data.signIn.token;
+    userStore.user = data.data.signIn.user;
     router.push({name: 'login'});
   }).catch((error) => {
     console.log(error)
